@@ -1,10 +1,14 @@
 package com.girteka.assignment.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
+@Entity
 public class Card {
+    @Id
     private long id;
 
     @ManyToOne
@@ -13,6 +17,14 @@ public class Card {
     private String type;
     private String cardNumber;
     private LocalDateTime expiry;
+
+    public Card(long id, Customer customer, String type, String cardNumber, LocalDateTime expiry) {
+        this.id = id;
+        this.customer = customer;
+        this.type = type;
+        this.cardNumber = cardNumber;
+        this.expiry = expiry;
+    }
 
     public long getId() {
         return id;

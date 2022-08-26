@@ -1,10 +1,14 @@
 package com.girteka.assignment.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
+@Entity
 public class Account {
+    @Id
     private long id;
 
     @ManyToOne
@@ -13,6 +17,14 @@ public class Account {
     private String iban;
     private String currency;
     private BigDecimal balance;
+
+    public Account(long id, Customer customer, String iban, String currency, BigDecimal balance) {
+        this.id = id;
+        this.customer = customer;
+        this.iban = iban;
+        this.currency = currency;
+        this.balance = balance;
+    }
 
     public long getId() {
         return id;

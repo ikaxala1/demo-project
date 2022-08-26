@@ -12,8 +12,16 @@ public class Customer {
     private String fullName;
     private String type;
 
+    public Customer(long id, String fullName, String type, List<Card> cards, List<Account> accounts) {
+        this.id = id;
+        this.fullName = fullName;
+        this.type = type;
+        this.cards = cards;
+        this.accounts = accounts;
+    }
+
     @OneToMany(mappedBy = "customer")
-    private List<Customer> cards;
+    private List<Card> cards;
 
     @OneToMany(mappedBy = "customer")
     private List<Account> accounts;
@@ -42,11 +50,11 @@ public class Customer {
         this.type = type;
     }
 
-    public List<Customer> getCards() {
+    public List<Card> getCards() {
         return cards;
     }
 
-    public void setCards(List<Customer> cards) {
+    public void setCards(List<Card> cards) {
         this.cards = cards;
     }
 
