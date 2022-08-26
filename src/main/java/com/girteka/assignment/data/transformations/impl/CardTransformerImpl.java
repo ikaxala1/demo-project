@@ -17,15 +17,19 @@ import static com.girteka.assignment.constants.CustomerConstants.HYPHEN;
 
 @Component
 class CardTransformerImpl implements CardTransformer {
+    @Override
     public List<CardDto> getCartDtos(Customer customer) {
         return customer.getCards().stream()
                 .map(this::cardToCardDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
     public CardDto cardToCardDto(Card card) {
         return new CardDto(card.getId(), getCardDtoValue(card));
     }
 
+    @Override
     public String getCardDtoValue(Card card) {
         String[] cardNumberArray = card.getCardNumber().split(" ");
 

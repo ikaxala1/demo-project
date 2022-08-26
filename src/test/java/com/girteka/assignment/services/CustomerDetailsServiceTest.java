@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 
@@ -43,9 +44,11 @@ class CustomerDetailsServiceTest {
     private static Customer customer;
     private static List<CardDto> cardDtos;
     private static List<AccountDto> accounDtos;
+    private static long id = 1;
 
     @BeforeAll
     public static void beforeAll() {
+        id = 1;
         Card card1 = new Card(2, null, "Credit", "7841 2345 83912 7452", LocalDateTime.parse("2022-03-07T10:34:59"));
         Card card2 = new Card(3, null, "Debit", "1254 2538 8965 1245", LocalDateTime.parse("2018-09-17T09:25:34"));
         List<Card> cards = List.of(card1, card2);
@@ -62,12 +65,22 @@ class CustomerDetailsServiceTest {
         AccountDto accountDto1 = new AccountDto(2, "SE7280000810340009783242 - 6231.84 SEK");
         AccountDto accountDto2 = new AccountDto(3, "GB33BUKB20201555555555 - 895.54 GBP");
 
+        CustomerDetailsDto customerDetailsDtoExpected = new CustomerDetailsDto(customer.getId(), customer.getFullName(),
+                customer.getType(), cardDtos, accounDtos);
+
         cardDtos = List.of(cardDto1, cardDto2);
         accounDtos = List.of(accountDto1, accountDto2);
     }
 
     @Test
     void getCustomerDetails() {
+        given(cardTransformer.getCartDtos(customer)).willReturn(cardDtos);
+        given(accountTransformer.getAccountDtos(customer)).willReturn(accounDtos);
+        given(customerRepository.findById(id)).willReturn(Optional.of(customer));
+        CustomerDetailsDto customerDetailsDtoExpected = new CustomerDetailsDto(customer.getId(), customer.getFullName(),
+                customer.getType(), cardDtos, accounDtos);
+        CustomerDetailsDto customerDetails = customerDetailsService.getCustomerDetails(id);
+        Assertions.assertEquals(customerDetailsDtoExpected, customerDetails);
     }
 
     @Test

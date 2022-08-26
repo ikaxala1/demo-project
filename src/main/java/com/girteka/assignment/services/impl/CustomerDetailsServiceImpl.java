@@ -28,12 +28,14 @@ class CustomerDetailsServiceImpl implements CustomerDetailsService {
         this.cardTransformer = cardTransformer;
     }
 
+    @Override
     public CustomerDetailsDto getCustomerDetails(long id) {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(id));
         logger.info("Found customer with given Id");
         return customerToCustomerDetailsDto(customer);
     }
 
+    @Override
     public CustomerDetailsDto customerToCustomerDetailsDto(Customer customer) {
         return new CustomerDetailsDto(customer.getId(), customer.getFullName(), customer.getType(),
                 cardTransformer.getCartDtos(customer),

@@ -18,6 +18,9 @@ public class Card {
     private String cardNumber;
     private LocalDateTime expiry;
 
+    public Card() {
+    }
+
     public Card(long id, Customer customer, String type, String cardNumber, LocalDateTime expiry) {
         this.id = id;
         this.customer = customer;

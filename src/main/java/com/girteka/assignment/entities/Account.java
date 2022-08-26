@@ -18,6 +18,9 @@ public class Account {
     private String currency;
     private BigDecimal balance;
 
+    public Account() {
+    }
+
     public Account(long id, Customer customer, String iban, String currency, BigDecimal balance) {
         this.id = id;
         this.customer = customer;

@@ -1,5 +1,7 @@
 package com.girteka.assignment.dtos;
 
+import java.util.Objects;
+
 public class AccountDto {
     private long id;
     private String value;
@@ -23,5 +25,18 @@ public class AccountDto {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountDto that = (AccountDto) o;
+        return id == that.id && Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, value);
     }
 }

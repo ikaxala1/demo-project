@@ -12,6 +12,9 @@ public class Customer {
     private String fullName;
     private String type;
 
+    public Customer() {
+    }
+
     public Customer(long id, String fullName, String type, List<Card> cards, List<Account> accounts) {
         this.id = id;
         this.fullName = fullName;
