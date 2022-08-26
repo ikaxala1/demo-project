@@ -38,7 +38,7 @@ class CustomerDetailsServiceImpl implements CustomerDetailsService {
     @Override
     public CustomerDetailsDto customerToCustomerDetailsDto(Customer customer) {
         return new CustomerDetailsDto(customer.getId(), customer.getFullName(), customer.getType(),
-                cardTransformer.getCartDtos(customer),
+                cardTransformer.getCardDtos(customer),
                 accountTransformer.getAccountDtos(customer));
     }
 }

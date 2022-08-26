@@ -10,16 +10,22 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.girteka.assignment.constants.CustomerConstants.HIDDEN_NUMBERS;
 import static com.girteka.assignment.constants.CustomerConstants.HYPHEN;
+import static com.girteka.assignment.constants.TestConstants.BUSINESS;
+import static com.girteka.assignment.constants.TestConstants.CREDIT;
 
 @Component
 class CardTransformerImpl implements CardTransformer {
     @Override
-    public List<CardDto> getCartDtos(Customer customer) {
+    public List<CardDto> getCardDtos(Customer customer) {
+        Predicate<Card> notCreditCardForBusinessCustomer = card ->
+                !(customer.getType().equals(BUSINESS) && card.getType().equals(CREDIT));
         return customer.getCards().stream()
+                .filter(notCreditCardForBusinessCustomer)
                 .map(this::cardToCardDto)
                 .collect(Collectors.toList());
     }

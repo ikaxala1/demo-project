@@ -36,10 +36,9 @@ class CardTransformerTest {
 
     @Test
     void getCartDtos() {
-        CardDto cardDto1 = new CardDto(card1.getId(), XXXX_XXXX_XXXX_7452_CREDIT);
         CardDto cardDto2 = new CardDto(card2.getId(), XXXX_XXXX_XXXX_1245_DEBIT);
-        List<CardDto> expectedCardDtos = List.of(cardDto1, cardDto2);
-        List<CardDto> cardDtos = cardTransformer.getCartDtos(customer);
+        List<CardDto> expectedCardDtos = List.of(cardDto2);
+        List<CardDto> cardDtos = cardTransformer.getCardDtos(customer);
         assertEquals(expectedCardDtos, cardDtos);
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 public interface CardTransformer {
-    List<CardDto> getCartDtos(Customer customer);
+    List<CardDto> getCardDtos(Customer customer);
     CardDto cardToCardDto(Card card);
     String getCardDtoValue(Card card);
 }

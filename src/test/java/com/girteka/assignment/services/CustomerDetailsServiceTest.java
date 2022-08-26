@@ -68,13 +68,13 @@ class CustomerDetailsServiceTest {
         CustomerDetailsDto customerDetailsDtoExpected = new CustomerDetailsDto(customer.getId(), customer.getFullName(),
                 customer.getType(), cardDtos, accounDtos);
 
-        cardDtos = List.of(cardDto1, cardDto2);
+        cardDtos = List.of(cardDto2);
         accounDtos = List.of(accountDto1, accountDto2);
     }
 
     @Test
     void getCustomerDetails() {
-        given(cardTransformer.getCartDtos(customer)).willReturn(cardDtos);
+        given(cardTransformer.getCardDtos(customer)).willReturn(cardDtos);
         given(accountTransformer.getAccountDtos(customer)).willReturn(accounDtos);
         given(customerRepository.findById(id)).willReturn(Optional.of(customer));
         CustomerDetailsDto customerDetailsDtoExpected = new CustomerDetailsDto(customer.getId(), customer.getFullName(),
@@ -85,7 +85,7 @@ class CustomerDetailsServiceTest {
 
     @Test
     void customerToCustomerDetailsDto() {
-        given(cardTransformer.getCartDtos(customer)).willReturn(cardDtos);
+        given(cardTransformer.getCardDtos(customer)).willReturn(cardDtos);
         given(accountTransformer.getAccountDtos(customer)).willReturn(accounDtos);
 
         CustomerDetailsDto customerDetailsDtoExpected = new CustomerDetailsDto(customer.getId(), customer.getFullName(),
